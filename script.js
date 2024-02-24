@@ -74,5 +74,20 @@ function playGame() {
 
     checkWinner(userScore,computerScore);
 }
+//Select div with id of main
+const mainDiv = document.querySelector("#main")
+
+//Create 3 buttons
+const rockBtn = document.createElement("button");
+const paperBtn = document.createElement("button");
+const scissorsBtn = document.createElement("button");
+
+//Change names for each button
+rockBtn.textContent = "Rock";
+paperBtn.textContent = "Paper";
+scissorsBtn.textContent = "Scissors";
+
+//Attach buttons to div with id of main
+mainDiv.append(rockBtn, paperBtn, scissorsBtn);
 
 console.log(playGame());
