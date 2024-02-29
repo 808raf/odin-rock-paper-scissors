@@ -1,5 +1,6 @@
 let userScore = 0;
 let computerScore = 0;
+let tieScore = 0;
 let playerSelection = "";
 let computerSelection = "";
 let currRound = 0;
@@ -25,6 +26,10 @@ function checkWinner(userScore, computerScore){
         return console.log("Final Winner: Computer")
     }
 
+}
+
+function computeTie() {
+    tieScore = currRound - (computerScore + userScore)
 }
 
 function updateRound() {
@@ -75,9 +80,11 @@ function playGame() {
         YOU: ${userScore}
         COMPUTER: ${computerScore}`)
         updateRound();
+        computeTie();
         displayCurrentRound.textContent = `Round: ${currRound} `
         displayUserScore.textContent = `User: ${userScore} `
         displayComputerScore.textContent = `Computer: ${computerScore} `
+        displayTie.textContent = `Tie: ${tieScore} `
 
         if(userScore == 5 || computerScore == 5){
             checkWinner(userScore,computerScore);
@@ -116,11 +123,13 @@ const displayComputerScore = document.createElement("span");
 displayComputerScore.textContent = `Computer: ${computerScore} `
 const displayCurrentRound = document.createElement("span");
 displayCurrentRound.textContent = `Round: ${currRound} `
+const displayTie = document.createElement("span");
+displayTie.textContent = `Tie: ${tieScore} `
 
 const roundDiv = document.querySelector("#round")
 roundDiv.appendChild(displayCurrentRound)
 
-scoreDiv.append(displayUserScore, displayComputerScore );
+scoreDiv.append(displayUserScore, displayComputerScore, displayTie );
 
 const resultsDiv = document.querySelector("#results")
 const roundResults = document.createElement("span")
