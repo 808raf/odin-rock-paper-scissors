@@ -31,19 +31,22 @@ const getComputerChoice = () => {
 
 function playRound(playerSelection, computerSelection) {
 
-    const win = `You win! You picked ${playerSelection} and the computer picked ${computerSelection}.`
-    const lose = `You lose! You picked ${playerSelection} and the computer picked ${computerSelection}.`
-    const tie = `It's a tie! You picked ${playerSelection} and the computer picked ${computerSelection}.`
+    const win = `You win this round! You picked ${playerSelection} and the computer picked ${computerSelection}.`
+    const lose = `You lose this round! You picked ${playerSelection} and the computer picked ${computerSelection}.`
+    const tie = `It's a tie! You both picked ${playerSelection}.`
     let result = "";
 
     // Conditionals for winning
-    if (playerSelection == "rock" && computerSelection == "scissors" || playerSelection == "paper" && computerSelection == "scissors" || playerSelection == "scissors" && computerSelection == "paper"){
+    if (playerSelection == "rock" && computerSelection == "scissors" || playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissors" && computerSelection == "paper"){
         result = win;
+        roundResults.textContent = win
         addUserScore();
     } else if (playerSelection == computerSelection ){
         result = tie;
+        roundResults.textContent = tie
     } else {
         result = lose;
+        roundResults.textContent = lose
         addComputerScore();
     }
 
@@ -57,7 +60,12 @@ function playGame() {
         YOU: ${userScore}
         COMPUTER: ${computerScore}`)
 
-    checkWinner(userScore,computerScore);
+        displayUserScore.textContent = `User: ${userScore} `
+        displayComputerScore.textContent = `Computer: ${computerScore}`
+
+        if(userScore == 5 || computerScore == 5){
+            checkWinner(userScore,computerScore);
+        }
 }
 
 const mainDiv = document.querySelector("#main")
@@ -87,4 +95,14 @@ buttons.forEach((button) => {
 const scoreDiv = document.querySelector("#score");
 
 const displayUserScore = document.createElement("span");
+displayUserScore.textContent = `User: ${userScore} `
 const displayComputerScore = document.createElement("span");
+displayComputerScore.textContent = `Computer: ${computerScore}`
+
+scoreDiv.append(displayUserScore, displayComputerScore);
+
+const resultsDiv = document.querySelector("#results")
+const roundResults = document.createElement("span")
+
+roundResults.textContent = ""
+resultsDiv.appendChild(roundResults);
