@@ -2,6 +2,7 @@ let userScore = 0;
 let computerScore = 0;
 let playerSelection = "";
 let computerSelection = "";
+let currRound = 0;
 
 const options = ["rock", "paper", "scissors"]
 
@@ -15,12 +16,26 @@ function addComputerScore(){
 
 function checkWinner(userScore, computerScore){
     if(userScore > computerScore){
+        clearGame();
+        roundResults.textContent = "Final Winner: User"
         return console.log("Final Winner: User")
-    } else if (userScore == computerScore){
-        return console.log("Final Winner: It's a tie!")
     } else {
+        clearGame();
+        roundResults.textContent = "Final Winner: User"
         return console.log("Final Winner: Computer")
     }
+
+}
+
+function updateRound() {
+    currRound ++;
+}
+
+function clearGame() {
+//remove buttons
+mainDiv.removeChild(rockBtn)
+mainDiv.removeChild(paperBtn)
+mainDiv.removeChild(scissorsBtn)
 }
 
 const getComputerChoice = () => {
@@ -59,9 +74,10 @@ function playGame() {
         console.log(`SCORES:
         YOU: ${userScore}
         COMPUTER: ${computerScore}`)
-
+        updateRound();
+        displayCurrentRound.textContent = `Round: ${currRound}`
         displayUserScore.textContent = `User: ${userScore} `
-        displayComputerScore.textContent = `Computer: ${computerScore}`
+        displayComputerScore.textContent = `Computer: ${computerScore} `
 
         if(userScore == 5 || computerScore == 5){
             checkWinner(userScore,computerScore);
@@ -97,9 +113,11 @@ const scoreDiv = document.querySelector("#score");
 const displayUserScore = document.createElement("span");
 displayUserScore.textContent = `User: ${userScore} `
 const displayComputerScore = document.createElement("span");
-displayComputerScore.textContent = `Computer: ${computerScore}`
+displayComputerScore.textContent = `Computer: ${computerScore} `
+const displayCurrentRound = document.createElement("span");
+displayCurrentRound.textContent = `Round: ${currRound}`
 
-scoreDiv.append(displayUserScore, displayComputerScore);
+scoreDiv.append(displayUserScore, displayComputerScore, displayCurrentRound);
 
 const resultsDiv = document.querySelector("#results")
 const roundResults = document.createElement("span")
