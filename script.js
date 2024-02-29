@@ -75,7 +75,7 @@ function playGame() {
         YOU: ${userScore}
         COMPUTER: ${computerScore}`)
         updateRound();
-        displayCurrentRound.textContent = `Round: ${currRound}`
+        displayCurrentRound.textContent = `Round: ${currRound} `
         displayUserScore.textContent = `User: ${userScore} `
         displayComputerScore.textContent = `Computer: ${computerScore} `
 
@@ -115,12 +115,16 @@ displayUserScore.textContent = `User: ${userScore} `
 const displayComputerScore = document.createElement("span");
 displayComputerScore.textContent = `Computer: ${computerScore} `
 const displayCurrentRound = document.createElement("span");
-displayCurrentRound.textContent = `Round: ${currRound}`
+displayCurrentRound.textContent = `Round: ${currRound} `
 
-scoreDiv.append(displayUserScore, displayComputerScore, displayCurrentRound);
+const roundDiv = document.querySelector("#round")
+roundDiv.appendChild(displayCurrentRound)
+
+scoreDiv.append(displayUserScore, displayComputerScore );
 
 const resultsDiv = document.querySelector("#results")
 const roundResults = document.createElement("span")
 
 roundResults.textContent = ""
 resultsDiv.appendChild(roundResults);
+
